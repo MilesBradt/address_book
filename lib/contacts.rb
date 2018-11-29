@@ -1,30 +1,37 @@
 class Contact
-  # attr accessor :address,
-  # attr reader :firstname, :lastname
+
+  attr_accessor :firstname, :lastname, :phonenumber
+  attr_reader :id
 
   @@address_book = []
 
-  def intialize
-    @firstname = firstname
-    @lastname = lastname
-    @phonenumber = phonenumber
-    # @email = email
-    # @address = address
-    # @city = city
-    # @state = state
-    # @zipcode = zipcode
+  def initialize(attributes)
+    @firstname = attributes.fetch(:firstname)
+    @lastname = attributes.fetch(:lastname)
+    @phonenumber = attributes.fetch(:phonenumber)
+    @id = @@address_book.length + 1
   end
 
-  def store_contact
-    #this is where we push the object to the addressbbok array
+  def save
+  @@address_book.push(self)
   end
 
-  def update_contact
-    #this where we can retreive the contact and make updates
+  def self.all
+    return @@address_book
   end
 
-  def retrieve_contact
-    # get contact method
+  def self.find(id)
+    item_id = id.to_i()
+    @@address_book.each do |item|
+      if item.id == item_id
+        return item
+      end
+    end
   end
-
 end
+
+# Example contact
+# contact = Contact.new({:firstname => "Miles", :lastname => "Bradt", :phonenumber => "555-555-5555"})
+
+big  = Contact.new({:firstname => "Big", :lastname => "Kitty", :phonenumber => "555-555-5555"})
+#

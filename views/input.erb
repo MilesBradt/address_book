@@ -1,9 +1,26 @@
-<form id="new-contact">
-   <label for="new-first-name">First Name</label>
-   <input type="text" id="new-first-name" name="new-first-name">
-   <label for="new-last-name">Last Name</label>
-   <input type="text" id="new-last-name" name="new-last-name">
+<h1>Address Book</h1>
+
+<form action="/" method="post">
+  <div class="">
+    <label for="new-first-name">First Name</label>
+    <input type="text" id="new-first-name" name="new-first-name">
+
+    <label for="new-last-name">Last Name</label>
+    <input type="text" id="new-last-name" name="new-last-name">
+  </div>
+
    <label for="new-phone-number">Phone Number</label>
    <input type="text" id="new-phone-number" name="new-phone-number">
-   <button type="submit">Add</button>
+   <button type="submit" class="btn btn-info">Add</button>
 </form>
+
+<h1>Address Book:</h1>
+<ul>
+  <% if @address_book.kind_of?(Array) %>
+    <% @address_book.each do |each| %>
+      <p id='<%= each.id %>'><a href='/output/<%= each.id %>'><%= each.firstname %></a></p>
+    <% end %>
+  <% else %>
+    <p id='<%= @address_book.id %>'><a href='/output/<%= @address_book.id %>'><%= @address_book.firstname %></a></p>
+  <% end %>
+</ul>
