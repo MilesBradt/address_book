@@ -1,1 +1,15 @@
 <h1>Info for <%= @contact.firstname %> </h1>
+<h4>Phone: <%= @contact.phonenumber %> </h4>
+
+<br>
+
+<div>
+  <form method="post" action="/output/:id">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete This Page">
+  </form>
+</div>
+
+<br>
+
+<a href="/">Home</a>

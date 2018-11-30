@@ -5,7 +5,7 @@ also_reload('lib/**/*.rb')
 require('./lib/contacts')
 
 get('/') do
-
+  @address_book = Contact.all
   erb(:input)
 end
 
@@ -23,4 +23,10 @@ get('/output/:id') do
   uid = params[:id].to_i
   @contact = Contact.find(uid)
   erb(:output)
+end
+
+delete ("/output/:id") do
+  uid = params[:id].to_i - 1
+  @contact = Contact.delete_content(uid)
+  redirect "/"
 end

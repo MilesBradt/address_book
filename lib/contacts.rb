@@ -1,7 +1,7 @@
 class Contact
 
-  attr_accessor :firstname, :lastname, :phonenumber
-  attr_reader :id
+  attr_accessor :firstname, :lastname, :phonenumber, :id
+
 
   @@address_book = []
 
@@ -9,7 +9,7 @@ class Contact
     @firstname = attributes.fetch(:firstname)
     @lastname = attributes.fetch(:lastname)
     @phonenumber = attributes.fetch(:phonenumber)
-    @id = @@address_book.length + 1
+    @id = @@address_book.length
   end
 
   def save
@@ -20,6 +20,14 @@ class Contact
     return @@address_book
   end
 
+  def self.reassign_ids
+    if (@@address_book != [])
+      @@address_book.each_with_index do |contact, i|
+        contact.id = i
+      end
+    end
+  end
+
   def self.find(id)
     item_id = id.to_i()
     @@address_book.each do |item|
@@ -27,6 +35,11 @@ class Contact
         return item
       end
     end
+  end
+
+  def self.delete_content(id)
+    @@address_book.delete_at(id)
+    self.reassign_ids
   end
 end
 
